@@ -10,8 +10,6 @@ class HumanPlayer:
     # Allow game to define player token (eg. X or O)
     def set_token(self, token):
         self.token = token
-    def get_token(self):
-        return self.token
 
     def play(self, board):
         _print(board.printable_board())
@@ -26,8 +24,6 @@ class HumanPlayer:
 class RandomPlayer:
 
     def set_token(self, token):
-        pass
-    def get_token(self):
         pass
     def play(self, board):
         available = []

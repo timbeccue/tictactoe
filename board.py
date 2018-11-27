@@ -16,16 +16,10 @@ class Board:
     def __init__(self):
         self.board = [[0 for i in range(self.BOARD_SIZE)] for j in range(self.BOARD_SIZE)]
 
-    def reset_board(self):
-        self.board = [[0 for i in range(self.BOARD_SIZE)] for j in range(self.BOARD_SIZE)]
-
     def check_open_space(self, row, col):
         if row > self.BOARD_SIZE-1 or row < 0: return False
         if col > self.BOARD_SIZE-1 or col < 0: return False
         return self.board[row][col] == 0
-
-    def play(self, player, row, column):
-        self.board[row][column] = player
 
     def check_win(self):
         winning_player = 0
@@ -45,6 +39,12 @@ class Board:
             winning_player = self.board[1][1]
 
         return winning_player
+
+    def play(self, player, row, column):
+        self.board[row][column] = player
+
+    def reset_board(self):
+        self.board = [[0 for i in range(self.BOARD_SIZE)] for j in range(self.BOARD_SIZE)]
 
     def get_board(self):
         _print(self.board)
