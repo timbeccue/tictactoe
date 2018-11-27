@@ -31,5 +31,4 @@ class RandomPlayer:
             for col in range(3):
                 if board.check_open_space(row, col):
                     available.append((row,col))
-        _print(f"available: {available}, length: {len(available)}")
         return available[random.randint(0, len(available)) - 1]

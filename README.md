@@ -1,6 +1,6 @@
 # tictactoe
 
-Start a game by running game.py
+Start a game by running game.py.
 
 Specify human or random players in game.py's main function.
 
