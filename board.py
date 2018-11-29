@@ -41,7 +41,13 @@ class Board:
         return winning_player
 
     def play(self, player, row, column):
-        self.board[row][column] = player
+        if self.check_open_space(row, column):
+            self.board[row][column] = player
+
+    #def play_simulation(self, player, row, column):
+    #    sim_board = self.board
+    #    sim_board[row][col] = player
+
 
     def reset_board(self):
         self.board = [[0 for i in range(self.BOARD_SIZE)] for j in range(self.BOARD_SIZE)]

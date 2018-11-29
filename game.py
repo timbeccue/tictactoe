@@ -33,8 +33,7 @@ class Game:
             player_idx = next(self.p_turn)
             player = self.players[player_idx]
             row, col = player.play(self.board)
-            if self.board.check_open_space(row,col):
-                self.board.play(self.tokens[player_idx], row, col)
+            self.board.play(self.tokens[player_idx], row, col)
             winner = self.board.check_win()
             turn += 1
         _print(f"Winner is {winner}!")
