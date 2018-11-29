@@ -32,3 +32,13 @@ class RandomPlayer:
                 if board.check_open_space(row, col):
                     available.append((row,col))
         return available[random.randint(0, len(available)) - 1]
+
+class PerfectPlayer:
+    def set_token(self, token):
+        self.token = token
+
+    def play(self, board):
+        row = col = 0
+
+
+        return row, col

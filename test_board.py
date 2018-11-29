@@ -46,6 +46,14 @@ class Test_Board(unittest.TestCase):
             self.board.play(player,i,1)
         self.assertEqual(self.board.check_win(), player)
 
+    def test_check_win_custom_board(self):
+        _print("testing: checking check_win with a specified custom board")
+        player = 'c'
+        board = self.board.get_board()
+        for i in range(3):
+            board[i][i] = player
+        self.assertEqual(self.board.check_win(board), player)
+
     def test_check_open_space(self):
         _print("testing: checking open spaces")
         player = 'x'
