@@ -11,21 +11,23 @@ def _print(to_print):
 
 class Board:
 
-    BOARD_SIZE = 3
+    def __init__(self, board_size=3):
+        self.board_size = 3
+        self.board = [[0 for i in range(self.board_size)] for j in range(self.board_size)]
 
-    def __init__(self):
-        self.board = [[0 for i in range(self.BOARD_SIZE)] for j in range(self.BOARD_SIZE)]
-
-    def check_open_space(self, row, col):
-        if row > self.BOARD_SIZE-1 or row < 0: return False
-        if col > self.BOARD_SIZE-1 or col < 0: return False
-        return self.board[row][col] == 0
+    def check_open_space(self, row, col, board=0):
+        if board is 0: board = self.board
+        size = len(board)
+        if row > size-1 or row < 0: return False
+        if col > size-1 or col < 0: return False
+        return board[row][col] == 0
 
     def check_win(self, board=0):
         if board is 0: board = self.board
+        size = len(board)
         winning_player = 0
         _print(board)
-        for i in range(self.BOARD_SIZE):
+        for i in range(size):
             # Check rows
             if 0 != board[i][0] == board[i][1] == board[i][2]:
                 winning_player = board[i][0]
@@ -46,18 +48,19 @@ class Board:
             self.board[row][column] = player
 
     def reset_board(self):
-        self.board = [[0 for i in range(self.BOARD_SIZE)] for j in range(self.BOARD_SIZE)]
+        self.board = [[0 for i in range(self.board_size)] for j in range(self.board_size)]
 
     def get_board(self):
         _print(self.board)
         return self.board
 
-    def printable_board(self):
+    def printable_board(self, board=0):
+        if board is 0: board = self.board
         pretty_board = f"""
         -----------
-        | {self.board[0][0]}  {self.board[0][1]}  {self.board[0][2]} |
-        | {self.board[1][0]}  {self.board[1][1]}  {self.board[1][2]} |
-        | {self.board[2][0]}  {self.board[2][1]}  {self.board[2][2]} |
+        | {board[0][0]}  {board[0][1]}  {board[0][2]} |
+        | {board[1][0]}  {board[1][1]}  {board[1][2]} |
+        | {board[2][0]}  {board[2][1]}  {board[2][2]} |
         -----------
         """
         return(pretty_board)
