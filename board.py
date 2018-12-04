@@ -1,5 +1,5 @@
 
-PRINT = False
+PRINT = True
 def _print(to_print):
     if PRINT: print(to_print)
 

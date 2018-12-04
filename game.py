@@ -1,7 +1,7 @@
 
 import random
 from board import Board
-from players import HumanPlayer, RandomPlayer
+from players import HumanPlayer, RandomPlayer, PerfectPlayer
 from itertools import cycle
 
 PRINT = True
@@ -20,8 +20,8 @@ class Game:
         if random.getrandbits(1): next(self.p_turn)
         # set player tokens
         self.tokens = ['A', 'B']
-        self.players[0].set_token('A')
-        self.players[1].set_token('B')
+        self.players[0].set_token('A', 'B')
+        self.players[1].set_token('B', 'A')
 
     def play(self):
 
@@ -42,8 +42,8 @@ class Game:
 
 
 if __name__=='__main__':
-    player1 = RandomPlayer()
-    player2 = RandomPlayer()
+    player1 = HumanPlayer()
+    player2 = PerfectPlayer()
     game = Game()
     game.add_players(player1, player2)
     game.play()
