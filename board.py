@@ -17,6 +17,7 @@ class Board:
 
     def check_open_space(self, row, col, board=0):
         if board is 0: board = self.board
+        #_print(f'Board in check_open_space: {board}')
         size = len(board)
         if row > size-1 or row < 0: return False
         if col > size-1 or col < 0: return False
@@ -26,7 +27,6 @@ class Board:
         if board is 0: board = self.board
         size = len(board)
         winning_player = 0
-        _print(board)
         for i in range(size):
             # Check rows
             if 0 != board[i][0] == board[i][1] == board[i][2]:
@@ -43,6 +43,15 @@ class Board:
 
         return winning_player
 
+    def check_is_board_full(self, board=0):
+        if board is 0: board = self.board
+        size = len(board)
+        for row in range(size):
+            for col in range(size):
+                if board[row][col] is 0:
+                    return False
+        return True
+
     def play(self, player, row, column):
         if self.check_open_space(row, column):
             self.board[row][column] = player
@@ -51,7 +60,6 @@ class Board:
         self.board = [[0 for i in range(self.board_size)] for j in range(self.board_size)]
 
     def get_board(self):
-        _print(self.board)
         return self.board
 
     def printable_board(self, board=0):

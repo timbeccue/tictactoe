@@ -1,5 +1,5 @@
 
-import random
+import random, copy
 from board import Board as gb
 
 PRINT = True
@@ -52,27 +52,35 @@ class PerfectPlayer:
 
         # No decision needed if only one move is possible
         if len(available_moves) is 1:
+            _print('PP: one move available')
             return available_moves[0]
 
         # Win if possible
         move = self._search_winning_moves(self.current_board, available_moves)
-        if move: return move
+        if move:
+            _print('PP: winning move')
+            return move
 
         # Prevent loss if imminent
         move = self._search_prevent_loss(self.current_board, available_moves)
-        if move: return move
+        if move:
+            _print('PP: prevent loss')
+            return move
 
         # Play center if open
         if (1,1) in available_moves:
+            _print('PP: center is open')
             return (1,1)
 
         # Play corner if open
         for corner in [(0,0), (0,2), (2,0), (2,2)]:
             if corner in available_moves:
+                _print('PP: open corner')
                 return corner
 
         # Else, play random
-        return available_moves[random.randint(0, len(available)) - 1]
+        _print('PP: last resort is random move')
+        return available_moves[random.randint(0, len(available_moves)) - 1]
 
     def _save_current_game_board(self, board):
         self.current_board = board.get_board()
@@ -88,15 +96,16 @@ class PerfectPlayer:
 
     def _search_winning_moves(self, game_board, available):
         for move in available:
-            possible_board = game_board
+            possible_board = copy.deepcopy(game_board)
             possible_board[move[0]][move[1]] = self.token
             if self.gb.check_win(possible_board) == self.token:
+                #_print(f'found a winning move: {move}')
                 return move
         return False
 
     def _search_prevent_loss(self, game_board, available):
         for move in available:
-            possible_board = game_board
+            possible_board = copy.deepcopy(game_board)
             possible_board[move[0]][move[1]] = self.opponent
             if self.gb.check_win(possible_board) == self.opponent:
                 return move
